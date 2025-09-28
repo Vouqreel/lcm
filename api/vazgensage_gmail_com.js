@@ -10,7 +10,7 @@ export default function handler(req, res) {
     const numX = parseInt(x);
     const numY = parseInt(y);
     
-    if (numX <= 0 || numY <= 0 || !Number.isInteger(numX) || !Number.isInteger(numY)) {
+    if (numX < 0 || numY < 0 || !Number.isInteger(numX) || !Number.isInteger(numY)) {
         return res.status(200).send('NaN');
     }
     
