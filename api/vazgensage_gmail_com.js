@@ -7,10 +7,16 @@ export default function handler(req, res) {
         return res.status(200).send('NaN');
     }
     
-    const numX = parseInt(x);
-    const numY = parseInt(y);
+    let bigX, bigY;
     
-    if (numX < 0 || numY < 0 || !Number.isInteger(numX) || !Number.isInteger(numY)) {
+    try {
+        bigX = BigInt(x);
+        bigY = BigInt(y);
+    } catch (e) {
+        return res.status(200).send('NaN');
+    }
+    
+    if (bigX < 0n || bigY < 0n) {
         return res.status(200).send('NaN');
     }
     
@@ -27,9 +33,6 @@ export default function handler(req, res) {
         if (a === 0n || b === 0n) return 0n;
         return (a * b) / gcd(a, b);
     }
-    
-    const bigX = BigInt(numX);
-    const bigY = BigInt(numY);
     const result = lcm(bigX, bigY);
     
     return res.status(200).send(result.toString());
